@@ -3,7 +3,7 @@ import { Container, Heading } from "@chakra-ui/react"
 function App() {
 
   return (
-    <Container height="100vh" display="flex" justifyContent="center" alignItems="center">
+    <Container height="100vh" maxW="container.xl" display="flex" justifyContent="center" alignItems="center">
       <Heading as="h1" size="4xl" textAlign="center">
         มึงเร่งกุกุไม่ทำแม่ง อส
       </Heading>
