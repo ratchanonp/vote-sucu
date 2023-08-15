@@ -1,18 +1,25 @@
-import { Container, Heading, Stack, Text } from "@chakra-ui/react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import IndexPage from "./pages"
+import CallBack from "./pages/callback"
+import TopicPage from "./pages/topic"
+import TopicsPage from "./pages/topics"
 
 function App() {
 
   return (
-    <Container height="100svh" maxW="container.xl" display="flex" justifyContent="center" alignItems="center">
-      <Stack>
-        <Heading as="h1" size="4xl" textAlign="center">
-          ประชามติ
-        </Heading>
-        <Text fontSize="sm" textAlign="center">
-          เร็วๆนี้ทุกโรงภาพยนตร์
-        </Text>
-      </Stack>
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/topics" >
+          <Route index element={<TopicsPage />} />
+          <Route path=":topicId" element={<TopicPage />} />
+        </Route>
+        <Route path="callback" element={<CallBack />} />
+        <Route path="backoffice">
+          <Route index element={<div>Backoffice</div>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
