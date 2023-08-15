@@ -15,6 +15,7 @@ const CallBack = () => {
             headers.append("DeeTicket", ticketId)
 
             const res = await fetch("https://account.it.chula.ac.th/serviceValidation", {
+                method: "POST",
                 headers,
             });
 
