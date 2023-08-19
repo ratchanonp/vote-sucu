@@ -22,7 +22,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
-const functions = getFunctions(app);
+const functions = getFunctions(app, 'asia-southeast1');
 
 if (import.meta.env.NODE_ENV === 'development') {
     connectFirestoreEmulator(db, 'localhost', 8080);
