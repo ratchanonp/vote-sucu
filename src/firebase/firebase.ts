@@ -24,8 +24,11 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const functions = getFunctions(app);
 
-connectFirestoreEmulator(db, 'localhost', 8080);
-connectFunctionsEmulator(functions, 'localhost', 4000);
+if (import.meta.env.NODE_ENV === 'development') {
+    connectFirestoreEmulator(db, 'localhost', 8080);
+    connectFunctionsEmulator(functions, 'localhost', 4000);
+}
+
 
 export {
     analytics,
