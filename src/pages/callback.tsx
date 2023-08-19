@@ -1,5 +1,8 @@
-import { useEffect } from "react";
+import { httpsCallable } from "firebase/functions";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { functions } from "../firebase/firebase";
+import { ChulaSSOData } from "../interfaces/cusso.interface";
 
 const CallBack = () => {
 
@@ -7,36 +10,26 @@ const CallBack = () => {
     const [searchParams] = useSearchParams();
     const ticketId = searchParams.get("ticket");
 
+    const [response, setResponse] = useState<ChulaSSOData>();
+    const serviceValidation = httpsCallable(functions, "serviceValidation");
+
     useEffect(() => {
-        const getData = async (ticketId: string) => {
-            const headers = new Headers();
-
-            headers.append("DeeAppId", "app.web.vote-sucu")
-            headers.append("DeeAppSecret", "05fa61aa574560830e5f460b33c55c377953d4142c2d39185b3f60c23d916dba45405e61fdc5b8a48338128e276aa0b9a4d5f1aaabb6274e0299dd8a42a9275c")
-            headers.append("DeeTicket", ticketId)
-
-            try {
-                const res = await fetch("https://account.it.chula.ac.th/serviceValidation", {
-                    method: "POST",
-                    headers,
-                });
-
-                const data = await res.json();
-                console.log(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
         if (ticketId) {
-            getData(ticketId);
+            serviceValidation({ ticket: ticketId })
+                .then((res) => {
+                    console.log(res);
+                    setResponse(res.data as ChulaSSOData);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
         }
-    }, [ticketId]);
+    }, [serviceValidation, ticketId]);
 
     return (
         <pre>
             {JSON.stringify(ticketId, null, 2)}
-            { }
+            {JSON.stringify(response, null, 2)}
         </pre>
     )
 }
