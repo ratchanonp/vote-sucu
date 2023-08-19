@@ -4,14 +4,15 @@ import { useState } from "react";
 import SmoVidyaLogo from "../../assets/white_smovidya_logo.png";
 import Policy from "../../components/Policy";
 import VoteLottie from "../../lottie/vote.json";
-
 import styles from './index.module.css';
+
 
 const IndexPage = () => {
 
 
     const [isAccepted, setIsAccepted] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
+
 
     return (
         <Flex bgColor="primary">
@@ -67,7 +68,20 @@ const IndexPage = () => {
                                     </Checkbox>
                                 </Button>
 
-                                <Button size="lg" bgColor="black" colorScheme="blackAlpha" color="white" w="fit-content" isDisabled={!isAccepted} >เข้าสู่ระบบ ผ่าน Chula SSO</Button>
+                                <Button
+                                    size="lg"
+                                    bgColor="black"
+                                    colorScheme="blackAlpha"
+                                    color="white"
+                                    w="fit-content"
+                                    isDisabled={!isAccepted}
+                                    onClick={
+                                        () => window.location.href = "https://account.it.chula.ac.th/html/login.html?service=https://vote-sucu.web.app/callback"
+                                    }
+                                >
+                                    เข้าสู่ระบบ ผ่าน Chula SSO
+                                </Button>
+
                             </Stack>
                         </Stack>
                         <Flex justifyContent="center">
