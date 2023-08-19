@@ -10,6 +10,7 @@ import styles from './index.module.css';
 const IndexPage = () => {
 
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isAccepted, setIsAccepted] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
 
