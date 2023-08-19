@@ -78,6 +78,8 @@ const IndexPage = () => {
                                     onClick={
                                         () => window.location.href = "https://account.it.chula.ac.th/html/login.html?service=https://vote-sucu.web.app/callback"
                                     }
+                                    _focus={{ backgroundColor: "black" }}
+                                    _hover={{ backgroundColor: "black" }}
                                 >
                                     เข้าสู่ระบบ ผ่าน Chula SSO
                                 </Button>
