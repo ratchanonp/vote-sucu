@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import IndexPage from "./pages"
 import CallBack from "./pages/callback"
+import IndexPage from "./pages/index"
 import TopicPage from "./pages/topic"
 import TopicsPage from "./pages/topics"
 

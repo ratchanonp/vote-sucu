@@ -1,9 +1,11 @@
 import { Button, Checkbox, Container, Flex, HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react";
 import { Player } from '@lottiefiles/react-lottie-player';
 import { useState } from "react";
-import SmoVidyaLogo from "../assets/white_smovidya_logo.png";
-import Policy from "../components/Policy";
-import VoteLottie from "../lottie/vote.json";
+import SmoVidyaLogo from "../../assets/white_smovidya_logo.png";
+import Policy from "../../components/Policy";
+import VoteLottie from "../../lottie/vote.json";
+
+import styles from './index.module.css';
 
 const IndexPage = () => {
 
@@ -13,40 +15,49 @@ const IndexPage = () => {
 
     return (
         <Flex bgColor="primary">
-            <Container h="100svh" maxW="container.xl" >
-                <Stack my={20}>
-                    <HStack spacing={5} mb={20}>
-                        <img src={SmoVidyaLogo} alt="SmoVidya Logo" width={75} height={75} />
-                        <Heading fontSize="3xl" color="white" fontWeight="medium">
-                            สโมสรนิสิตคณะวิทยาศาสตร์
-                        </Heading>
+            <Container minH="100svh" maxW="container.xl" >
+                <Stack my={{ base: 5, lg: 20 }}>
+                    <HStack spacing={5} mb={{ base: 5, lg: 20 }}>
+                        <img src={SmoVidyaLogo} alt="SmoVidya Logo" className={styles.logo} />
                     </HStack>
-                    <Flex w="full" justifyContent="space-between">
-
-                        <Stack ml={20}>
-                            <Heading fontSize="3xl">
+                    <Flex
+                        flexDirection={{ base: "column-reverse", lg: "row" }}
+                        w="full"
+                        justifyContent="space-between"
+                        gap={{ base: 10, lg: 20 }}
+                    >
+                        <Stack ml={{ base: 0, lg: 20 }} textAlign={{ base: "center", lg: "left" }} spacing={0}>
+                            <Heading fontSize={{ base: "2xl", lg: "3xl" }}>
                                 ระบบ
                             </Heading>
-                            <Heading as="h1" fontSize="9xl" textShadow="7px 7px #FFF">
+                            <Heading as="h1" fontSize={{ base: "7xl", lg: "9xl" }} textShadow="7px 7px #FFF">
                                 ประชามติ
                             </Heading>
-                            <Heading as="h2" fontSize="5xl" >
+                            <Heading as="h2" fontSize={{ base: "2xl", lg: "4xl" }} >
                                 สโมสรนิสิตคณะวิทยาศาสตร์
                             </Heading>
 
-                            <Stack spacing={10}>
+                            <Stack
+                                spacing={10}
+                                alignItems={{
+                                    base: "center",
+                                    lg: "flex-start",
+                                }}
+                                display="flex"
+                            >
                                 <Button
                                     variant="ghost"
                                     _hover={{
                                         background: "transparent",
                                     }}
                                     w="fit-content"
+                                    h="fit-content"
                                     p={0}
                                     onClick={onOpen}
                                 >
                                     <Checkbox
                                         readOnly
-                                        size="lg"
+                                        size={{ base: "md", lg: "lg" }}
                                         colorScheme="blackAlpha"
                                         _checked={{ "& .chakra-checkbox__control": { background: "black" } }}
                                         borderColor="black" mt={10}
@@ -59,18 +70,23 @@ const IndexPage = () => {
                                 <Button size="lg" bgColor="black" colorScheme="blackAlpha" color="white" w="fit-content" isDisabled={!isAccepted} >เข้าสู่ระบบ ผ่าน Chula SSO</Button>
                             </Stack>
                         </Stack>
-                        <Flex>
+                        <Flex justifyContent="center">
                             <Player
                                 autoplay
                                 loop
                                 src={VoteLottie}
-                                style={{ height: '500px', width: '500px' }}
-                            >
-                                ∂                            </Player>
+                                style={{
+                                    height: "auto",
+                                    width: "100%",
+                                }}
+                            />
                         </Flex>
                     </Flex>
-                </Stack>
-                <Modal isOpen={isOpen} onClose={onClose} size="xl" scrollBehavior="inside">
+                </Stack >
+                <Modal isOpen={isOpen} onClose={onClose} size={{
+                    base: "full",
+                    lg: "xl"
+                }} scrollBehavior="inside">
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader>นโยบายการจัดเก็บข้อมูลส่วนบุคคล</ModalHeader>
@@ -96,8 +112,8 @@ const IndexPage = () => {
                         </ModalFooter>
                     </ModalContent>
                 </Modal>
-            </Container>
-        </Flex>
+            </Container >
+        </Flex >
     )
 }
 
