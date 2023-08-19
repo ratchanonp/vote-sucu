@@ -26,12 +26,15 @@ setGlobalOptions({
 });
 
 export const serviceValidation = onCall<IServiceValidationParams, Promise<IServiceValidationRes>>({
-  cors: ["vote-sucu.web.app"],
+  cors: true,
 },
 async ({data}) => {
   logger.info("serviceValidation", {structuredData: true});
 
   const BASE_URL = new URL("https://account.it.chula.ac.th/serviceValidation");
+
+  logger.info("BASE_URL", {structuredData: true, BASE_URL: BASE_URL.toString()});
+  logger.info("ticket", {structuredData: true, ticket: data.ticket});
 
   const header = new Headers();
   header.append("DeeAppId", "app.web.vote-sucu");
