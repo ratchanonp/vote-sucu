@@ -1,4 +1,4 @@
-import { Button, Checkbox, Container, Flex, HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react";
+import { Button, Container, Flex, HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { Player } from '@lottiefiles/react-lottie-player';
 import { useState } from "react";
 import SmoVidyaLogo from "../../assets/white_smovidya_logo.png";
@@ -15,10 +15,10 @@ const IndexPage = () => {
 
 
     return (
-        <Flex bgColor="primary">
+        <Flex bgColor="primary.500">
             <Container minH="100svh" maxW="container.xl" >
                 <Stack my={{ base: 5, lg: 20 }}>
-                    <HStack spacing={5} mb={{ base: 5, lg: 20 }}>
+                    <HStack spacing={5} mb={{ base: 5, lg: 20 }} >
                         <img src={SmoVidyaLogo} alt="SmoVidya Logo" className={styles.logo} />
                     </HStack>
                     <Flex
@@ -38,7 +38,7 @@ const IndexPage = () => {
                                 สโมสรนิสิตคณะวิทยาศาสตร์
                             </Heading>
 
-                            <Stack
+                            {/* <Stack
                                 spacing={10}
                                 alignItems={{
                                     base: "center",
@@ -84,7 +84,11 @@ const IndexPage = () => {
                                     เข้าสู่ระบบ ผ่าน Chula SSO
                                 </Button>
 
-                            </Stack>
+                            </Stack> */}
+
+                            <Text mt={20} fontSize="xl">
+                                การลงประชามติ จะเกิดขึ้น<br />วันที่ 25 สิงหาคม 2566 <br /> เวลา 08.00 - 17.00 น.
+                            </Text>
                         </Stack>
                         <Flex justifyContent="center">
                             <Player
@@ -112,7 +116,7 @@ const IndexPage = () => {
                         </ModalBody>
 
                         <ModalFooter>
-                            <Button bgColor='primary' colorScheme="yellow" mr={3} onClick={
+                            <Button bgColor='primary.500' colorScheme="yellow" mr={3} onClick={
                                 () => {
                                     setIsAccepted(true)
                                     onClose()
