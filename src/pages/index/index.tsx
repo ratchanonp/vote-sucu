@@ -1,8 +1,6 @@
-import { Button, Container, Flex, HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import { Container, Flex, HStack, Heading, Stack, Text } from "@chakra-ui/react";
 import { Player } from '@lottiefiles/react-lottie-player';
-import { useState } from "react";
 import SmoVidyaLogo from "../../assets/white_smovidya_logo.png";
-import Policy from "../../components/Policy";
 import VoteLottie from "../../lottie/vote.json";
 import styles from './index.module.css';
 
@@ -11,8 +9,8 @@ const IndexPage = () => {
 
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [isAccepted, setIsAccepted] = useState(false)
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    // const [isAccepted, setIsAccepted] = useState(false)
+    // const { isOpen, onClose } = useDisclosure()
 
 
     return (
@@ -104,7 +102,7 @@ const IndexPage = () => {
                         </Flex>
                     </Flex>
                 </Stack >
-                <Modal isOpen={isOpen} onClose={onClose} size={{
+                {/* <Modal isOpen={isOpen} onClose={onClose} size={{
                     base: "full",
                     lg: "xl"
                 }} scrollBehavior="inside">
@@ -132,7 +130,7 @@ const IndexPage = () => {
                                 }}>ไม่ยอมรับ</Button>
                         </ModalFooter>
                     </ModalContent>
-                </Modal>
+                </Modal> */}
             </Container >
         </Flex >
     )
