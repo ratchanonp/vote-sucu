@@ -1,7 +1,6 @@
-
 import SmoVidyaLogo from "@/assets/white_smovidya_logo.png"
 import { Button, Container, Flex, HStack } from "@chakra-ui/react"
-import styles from './NavBar.module.css'
+import styles from './Navbar.module.css'
 
 const NavBar = () => {
 
