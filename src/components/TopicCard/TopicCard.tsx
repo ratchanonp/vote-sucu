@@ -62,7 +62,7 @@ function VoteButton({ topic }: { topic: ITopic }) {
   const { start, end, id } = topic;
 
   const { havesigned, loading } = useHaveVoted(id, ouid)
-  const canVote = new Date(start) < new Date() && new Date() < new Date(end) || true;
+  const canVote = new Date(start) < new Date() && new Date() < new Date(end);
 
   const buttonText = () => {
     if (!havesigned) {
