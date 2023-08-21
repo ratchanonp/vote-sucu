@@ -24,6 +24,11 @@ async function doSign(
     ouid: string,
 ): Promise<string | null> {
 
+    if (await haveSign(topicId, ouid)) {
+        window.location.href = "/error"
+        return null;
+    }
+
     const signsRef = collection(db, "signs");
     try {
         const docRef = await addDoc(signsRef, {

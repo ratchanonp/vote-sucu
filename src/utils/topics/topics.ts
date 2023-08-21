@@ -1,6 +1,6 @@
 import { db } from "@/firebase/firebase"
 import { ITopic, ITopicWithouId } from "@/interfaces/topic.interface"
-import { addDoc, collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore"
 import { wrapPromise } from "../wrapPromise"
 
 async function addTopic(topic: ITopicWithouId): Promise<string> {
@@ -22,6 +22,21 @@ async function getTopic(topicId: string): Promise<ITopic | null> {
     }
 }
 
+async function increaseParticipant(topicId: string): Promise<void> {
+    const docRef = doc(db, "topics", topicId)
+    const docSnap = await getDoc(docRef)
+
+    if (docSnap.exists()) {
+        const topic = docSnap.data() as ITopic
+        const newParticipant = topic.participants + 1
+
+        await updateDoc(docRef, {
+            participants: newParticipant
+        })
+
+    }
+}
+
 const getTopics = () => {
     const q = query(collection(db, "topics"), where("isPublished", "==", true))
 
@@ -37,8 +52,6 @@ const getTopics = () => {
                 })
             })
 
-            console.log(topics)
-
             return topics
         })
 
@@ -48,6 +61,6 @@ const getTopics = () => {
 }
 
 export {
-    addTopic, getTopic, getTopics
+    addTopic, getTopic, getTopics, increaseParticipant
 }
 

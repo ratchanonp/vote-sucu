@@ -1,9 +1,11 @@
+import useHaveVoted from "@/hooks/useGetHavesigned";
 import { ITopic } from "@/interfaces/topic.interface";
 import { onOpen } from "@/redux/features/modalSlice";
-import { Badge, Button, Flex, HStack, Heading, Icon, Stack, Text } from "@chakra-ui/react";
+import { RootState } from "@/redux/store";
+import { Badge, Button, Flex, HStack, Heading, Icon, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { AiFillCalendar, AiFillClockCircle } from "react-icons/ai";
 import { MdOutlineHowToVote } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import VoteAgreementModal from "../Modal/VoteAgreementModal";
 
 interface Props {
@@ -12,19 +14,17 @@ interface Props {
 
 export function TopicCard(props: Props) {
 
-  const dispatch = useDispatch();
-
   const formatTimeConfig: Intl.DateTimeFormatOptions = { hour: "2-digit", minute: "2-digit" };
   const formatDateConfig: Intl.DateTimeFormatOptions = { year: "numeric", month: "long", day: "numeric" };
 
   const { topic } = props;
-  const { title, participants, start, end, id } = topic;
+  const { title, participants, start, end } = topic;
 
   const formattedStartDate = new Date(start).toLocaleDateString("th-TH", formatDateConfig);
   const formattedStartTime = new Date(start).toLocaleTimeString("th-TH", formatTimeConfig);
   const formattedEndTime = new Date(end).toLocaleTimeString("th-TH", formatTimeConfig);
 
-  const canVote = new Date(start) < new Date() && new Date() < new Date(end) || true;
+
 
   return (
     <Flex
@@ -48,10 +48,47 @@ export function TopicCard(props: Props) {
         <Text fontSize="xs">ลงความเห็นแล้ว {participants} คน</Text>
       </Stack>
 
-      <Button border="2px solid #000" bgColor="primary.500" _hover={{ bottom: "3px", right: "3px", boxShadow: "3px 3px 0 0 #000000" }} boxShadow="0 0 0 0 #fff" color="black" isDisabled={!canVote} onClick={() => dispatch(onOpen(<VoteAgreementModal topicId={id} />))}>
-        <Icon as={MdOutlineHowToVote} mr={1} />
-        {canVote ? "ลงคะแนน" : "ไม่อยู่ในช่วงลงคะแนน"}
-      </Button>
+      <VoteButton topic={topic} />
     </Flex>
+  );
+}
+
+
+function VoteButton({ topic }: { topic: ITopic }) {
+
+  const dispatch = useDispatch();
+
+  const ouid = useSelector((state: RootState) => state.auth.user?.ouid) as string;
+  const { start, end, id } = topic;
+
+  const { havesigned, loading } = useHaveVoted(id, ouid)
+  const canVote = new Date(start) < new Date() && new Date() < new Date(end) || true;
+
+  const buttonText = () => {
+    if (!havesigned) {
+      if (canVote) {
+        return "ลงความเห็น"
+      } else {
+        return "ไม่อยู่ในช่วงเวลาลงความเห็น"
+      }
+    } else {
+      return "ลงความเห็นแล้ว"
+    }
+  }
+
+
+  return (
+    <Skeleton isLoaded={!loading} w="100%" display="flex">
+      <Button
+        w="100%"
+        border="2px solid #000" bgColor="primary.500" _hover={{
+          bottom: "3px",
+          right: "3px",
+          boxShadow: "3px 3px 0 0 #000000"
+        }} boxShadow="0 0 0 0 #fff" color="black" isDisabled={havesigned || !canVote} onClick={() => dispatch(onOpen(<VoteAgreementModal topicId={id} />))}>
+        <Icon as={MdOutlineHowToVote} mr={1} />
+        {buttonText()}
+      </Button>
+    </Skeleton>
   );
 }

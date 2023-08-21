@@ -1,14 +1,15 @@
 import ConfirmVoteModal from "@/components/Modal/ConfirmVote";
+import NavBar from "@/components/Navbar/NavBar";
+import Questions from "@/components/Questions/Questions";
+import useHaveVoted from "@/hooks/useGetHavesigned";
 import { useGetTopic } from "@/hooks/useGetTopic";
 import { onOpen, setSize } from "@/redux/features/modalSlice";
 import { RootState } from "@/redux/store";
 import { Button, Container, Flex, Heading, Skeleton, Stack } from "@chakra-ui/react";
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 
-const NavBar = lazy(() => import("@/components/Navbar/NavBar"));
-const Questions = lazy(() => import("@/components/Questions/Questions"));
 
 const TopicPage = () => {
 
@@ -17,9 +18,13 @@ const TopicPage = () => {
 
     const dispatch = useDispatch();
     const canSubmit = useSelector((state: RootState) => state.answer.canSubmit)
+    const ouid = useSelector((state: RootState) => state.auth.user?.ouid) as string;
+
+    const { havesigned } = useHaveVoted(topicId as string, ouid)
 
 
     if (topicId === undefined) return <Navigate to="/topics" />
+    if (havesigned) return <Navigate to="/topics" />
     return (
         <>
             <Flex flexDirection="column" minH="100svh" bgColor="primary.500">

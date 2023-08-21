@@ -1,6 +1,7 @@
 import { db } from "@/firebase/firebase";
 import { IResponse } from "@/interfaces/response.interface";
 import { addDoc, collection } from "firebase/firestore";
+import { increaseParticipant } from "../topics/topics";
 
 async function postResponse(response: IResponse): Promise<string> {
 
@@ -10,6 +11,8 @@ async function postResponse(response: IResponse): Promise<string> {
         ...response,
         timestamp: timestamp
     });
+
+    await increaseParticipant(response.topicId);
 
     const localPayload = {
         responseId: docRef.id,

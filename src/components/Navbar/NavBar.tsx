@@ -4,9 +4,6 @@ import styles from './Navbar.module.css'
 
 const NavBar = () => {
 
-    const currentDomain = window.location.pathname
-    console.log(currentDomain)
-
     const handleLogout = () => {
         window.location.href = `https://account.it.chula.ac.th/logout?service=${window.location.origin}`
     }
