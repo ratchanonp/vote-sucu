@@ -3,10 +3,6 @@
     height: 75px;
 }
 
-.lottie {
-    
-}
-
 @media screen and (max-width: 768px) {
     .logo {
         width: 50px;

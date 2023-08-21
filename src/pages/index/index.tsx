@@ -1,17 +1,17 @@
-import { Container, Flex, HStack, Heading, Stack, Text } from "@chakra-ui/react";
+import SmoVidyaLogo from "@/assets/white_smovidya_logo.png";
+import Policy from "@/components/Policy";
+import VoteLottie from "@/lottie/vote.json";
+import { Button, Checkbox, Container, Flex, HStack, Heading, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { Player } from '@lottiefiles/react-lottie-player';
-import SmoVidyaLogo from "../../assets/white_smovidya_logo.png";
-import VoteLottie from "../../lottie/vote.json";
+import { useState } from "react";
 import styles from './index.module.css';
 
 
 const IndexPage = () => {
 
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // const [isAccepted, setIsAccepted] = useState(false)
-    // const { isOpen, onClose } = useDisclosure()
-
+    const [isAccepted, setIsAccepted] = useState(false)
+    const { isOpen, onClose, onOpen } = useDisclosure()
 
     return (
         <Flex bgColor="primary.500">
@@ -37,7 +37,7 @@ const IndexPage = () => {
                                 สโมสรนิสิตคณะวิทยาศาสตร์
                             </Heading>
 
-                            {/* <Stack
+                            <Stack
                                 spacing={10}
                                 alignItems={{
                                     base: "center",
@@ -83,7 +83,7 @@ const IndexPage = () => {
                                     เข้าสู่ระบบ ผ่าน Chula SSO
                                 </Button>
 
-                            </Stack> */}
+                            </Stack>
 
                             <Text mt={20} fontSize="xl">
                                 การลงประชามติ จะเกิดขึ้น<br />วันที่ 25 สิงหาคม 2566 <br /> เวลา 08.00 - 17.00 น.
@@ -102,35 +102,32 @@ const IndexPage = () => {
                         </Flex>
                     </Flex>
                 </Stack >
-                {/* <Modal isOpen={isOpen} onClose={onClose} size={{
-                    base: "full",
-                    lg: "xl"
-                }} scrollBehavior="inside">
+                <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", lg: "lg" }}>
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader>นโยบายการจัดเก็บข้อมูลส่วนบุคคล</ModalHeader>
-                        <ModalCloseButton />
+
                         <ModalBody>
                             <Policy />
                         </ModalBody>
 
                         <ModalFooter>
-                            <Button bgColor='primary.500' colorScheme="yellow" mr={3} onClick={
-                                () => {
-                                    setIsAccepted(true)
-                                    onClose()
-                                }
-                            }>
+                            <Button
+                                bgColor='primary.500'
+                                colorScheme="yellow"
+                                w="full"
+                                border="2px solid black"
+                                onClick={
+                                    () => {
+                                        setIsAccepted(true)
+                                        onClose()
+                                    }
+                                }>
                                 ยอมรับ
                             </Button>
-                            <Button variant='ghost'
-                                onClick={() => {
-                                    setIsAccepted(false)
-                                    onClose()
-                                }}>ไม่ยอมรับ</Button>
                         </ModalFooter>
                     </ModalContent>
-                </Modal> */}
+                </Modal>
             </Container >
         </Flex >
     )

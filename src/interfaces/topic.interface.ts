@@ -1,16 +1,18 @@
 export interface ITopic {
     id: string;
     title: string;
-    description: string;
     start: string;
     end: string;
-    pause: boolean;
-    questions: IQuestion[];
+    isPublished: boolean;
+    participants: number;
+    questions?: IQuestion[];
 }
+
+export type ITopicWithouId = Omit<ITopic, "id">;
 
 export interface IQuestion {
     id: string;
-    question: string;
+    title: string;
     answers: IAnswer[];
 }
 
