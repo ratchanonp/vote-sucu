@@ -75,7 +75,7 @@ const IndexPage = () => {
                                     w="fit-content"
                                     isDisabled={!isAccepted}
                                     onClick={
-                                        () => window.location.href = "https://account.it.chula.ac.th/html/login.html?service=https://vote-sucu.web.app/callback"
+                                        () => window.location.href = `https://account.it.chula.ac.th/html/login.html?service=${window.location.origin}/callback`
                                     }
                                     _focus={{ backgroundColor: "black" }}
                                     _hover={{ backgroundColor: "black" }}

@@ -1,12 +1,15 @@
 
+import SmoVidyaLogo from "@/assets/white_smovidya_logo.png"
 import { Button, Container, Flex, HStack } from "@chakra-ui/react"
-import SmoVidyaLogo from "../../assets/white_smovidya_logo.png"
 import styles from './NavBar.module.css'
 
 const NavBar = () => {
 
+    const currentDomain = window.location.pathname
+    console.log(currentDomain)
+
     const handleLogout = () => {
-        window.location.href = "https://account.it.chula.ac.th/logout?service=https://vote-sucu.web.app/"
+        window.location.href = `https://account.it.chula.ac.th/logout?service=${window.location.origin}`
     }
 
     return (

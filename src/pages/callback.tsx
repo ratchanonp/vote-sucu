@@ -37,7 +37,7 @@ const CallBack = () => {
                 })
                 .catch((err) => {
                     console.log(err);
-                    navigate("/")
+                    navigate("/error")
                 })
         }
     }, [dispatch, navigate, serviceValidation, ticketId]);
