@@ -11,6 +11,7 @@ import TopicsPage from "./pages/topics/topics"
 import { onClose } from "./redux/features/modalSlice"
 import { RootState } from "./redux/store"
 import ProtectedRoute from "./utils/ProtectedRoute"
+import Unauthorize from "./pages/error/unauthorize"
 
 function App() {
   const { isOpen, children } = useSelector((state: RootState) => state.modal)
@@ -32,6 +33,7 @@ function App() {
           </Route>
           <Route path="success" element={<ProtectedRoute><VoteSuccessPage /></ProtectedRoute>} />
           <Route path="mockImport" element={<ProtectedRoute><MockImportPage /></ProtectedRoute>} />
+          <Route path="unauthorize" element={<Unauthorize />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Modal isOpen={isOpen} onClose={() => dispatch(onClose())} size={{ base: "full", md: "3xl" }} isCentered>

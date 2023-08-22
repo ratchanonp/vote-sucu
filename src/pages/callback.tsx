@@ -29,8 +29,17 @@ const CallBack = () => {
             serviceValidation({ ticket: ticketId })
                 .then((res) => {
                     console.log(res);
-                    dispatch(login(res.data as ChulaSSOData))
 
+                    const { ouid } = res.data as ChulaSSOData;
+
+                    const isScienceStudent = ouid.endsWith("23");
+
+                    if (!isScienceStudent) {
+                        navigate("/unauthorize"); return;
+                    }
+
+
+                    dispatch(login(res.data as ChulaSSOData))
                     localStorage.removeItem("user");
                     localStorage.setItem("user", JSON.stringify(res.data));
                     navigate("/topics")
