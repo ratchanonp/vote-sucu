@@ -9,13 +9,13 @@ import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDzy1-iSYq2DXFkof2_090sr0doahZb7f0",
-    authDomain: "vote-sucu.firebaseapp.com",
-    projectId: "vote-sucu",
-    storageBucket: "vote-sucu.appspot.com",
-    messagingSenderId: "1030565842438",
-    appId: "1:1030565842438:web:dd7afccb034494337cfd87",
-    measurementId: "G-W17S2NQNXR"
+    apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTHDOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGINGSENDERID,
+    appId: import.meta.env.VITE_FIREBASE_APPID,
+    measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENTID
 };
 
 // Initialize Firebase
@@ -24,11 +24,10 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const functions = getFunctions(app, 'asia-southeast1');
 
-if (import.meta.env.NODE_ENV === 'development') {
+if (import.meta.env.MODE === 'development') {
     connectFirestoreEmulator(db, 'localhost', 8080);
-    connectFunctionsEmulator(functions, 'localhost', 4000);
+    connectFunctionsEmulator(functions, 'localhost', 5001);
 }
-
 
 export {
     analytics,

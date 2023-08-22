@@ -1,4 +1,4 @@
-import {logger} from "firebase-functions/v1";
+import {logger} from "firebase-functions/v2";
 import {onCall} from "firebase-functions/v2/https";
 import {setGlobalOptions} from "firebase-functions/v2/options";
 
@@ -27,6 +27,7 @@ setGlobalOptions({
 
 export const serviceValidation = onCall<IServiceValidationParams, Promise<IServiceValidationRes>>({
   cors: true,
+  secrets: ["DEE_APP_ID", "DEE_APP_SECRET"],
 },
 async ({data}) => {
   logger.info("serviceValidation", {structuredData: true});
@@ -37,9 +38,8 @@ async ({data}) => {
   logger.info("ticket", {structuredData: true, ticket: data.ticket});
 
   const header = new Headers();
-  header.append("DeeAppId", "app.web.vote-sucu");
-  header.append("DeeAppSecret",
-    "05fa61aa574560830e5f460b33c55c377953d4142c2d39185b3f60c23d916dba45405e61fdc5b8a48338128e276aa0b9a4d5f1aaabb6274e0299dd8a42a9275c");
+  header.append("DeeAppId", process.env.DEE_APP_ID as string);
+  header.append("DeeAppSecret", process.env.DEE_APP_SECRET as string);
   header.append("DeeTicket", data.ticket);
 
   const requestOptions = {
