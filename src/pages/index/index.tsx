@@ -102,7 +102,7 @@ const IndexPage = () => {
                         </Flex>
                     </Flex>
                 </Stack >
-                <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", lg: "lg" }}>
+                <Modal isOpen={isOpen} onClose={onClose} isCentered size={{ base: "full", lg: "3xl" }}>
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader>นโยบายการจัดเก็บข้อมูลส่วนบุคคล</ModalHeader>

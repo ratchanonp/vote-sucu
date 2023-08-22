@@ -34,7 +34,7 @@ function App() {
           <Route path="mockImport" element={<ProtectedRoute><MockImportPage /></ProtectedRoute>} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        <Modal isOpen={isOpen} onClose={() => dispatch(onClose())} size={{ base: "full", md: "lg" }} isCentered>
+        <Modal isOpen={isOpen} onClose={() => dispatch(onClose())} size={{ base: "full", md: "3xl" }} isCentered>
           {children}
         </Modal>
       </BrowserRouter>

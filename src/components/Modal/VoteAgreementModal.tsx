@@ -21,7 +21,7 @@ function VoteAgreementModal(props: Props) {
             <ModalContent>
                 <ModalHeader>ข้อบังคับประชามติ</ModalHeader>
                 <ModalCloseButton />
-                <ModalBody display="flex">
+                <ModalBody display="flex" minH="80vh">
                     <VotePolicy />
                 </ModalBody>
 
