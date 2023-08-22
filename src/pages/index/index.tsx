@@ -1,7 +1,7 @@
 import SmoVidyaLogo from "@/assets/white_smovidya_logo.png";
-import Policy from "@/components/Policy";
+import PrivacyPolicy from "@/components/Policy/Policy";
 import VoteLottie from "@/lottie/vote.json";
-import { Button, Checkbox, Container, Flex, HStack, Heading, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Checkbox, Container, Flex, HStack, Heading, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { Player } from '@lottiefiles/react-lottie-player';
 import { useState } from "react";
 import styles from './index.module.css';
@@ -106,9 +106,9 @@ const IndexPage = () => {
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader>นโยบายการจัดเก็บข้อมูลส่วนบุคคล</ModalHeader>
-
+                        <ModalCloseButton />
                         <ModalBody>
-                            <Policy />
+                            <PrivacyPolicy />
                         </ModalBody>
 
                         <ModalFooter>

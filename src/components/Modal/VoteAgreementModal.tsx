@@ -2,7 +2,7 @@ import { onClose } from "@/redux/features/modalSlice"
 import { Button, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import Policy from "../Policy"
+import VotePolicy from "../Policy/VotePolicy"
 
 interface Props {
     topicId: string
@@ -21,8 +21,8 @@ function VoteAgreementModal(props: Props) {
             <ModalContent>
                 <ModalHeader>ข้อบังคับประชามติ</ModalHeader>
                 <ModalCloseButton />
-                <ModalBody>
-                    <Policy />
+                <ModalBody display="flex">
+                    <VotePolicy />
                 </ModalBody>
 
                 <ModalFooter>
