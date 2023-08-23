@@ -1,3 +1,5 @@
+import { functions } from "@/firebase/firebase";
+import { ChulaSSOData } from "@/interfaces/cusso.interface";
 import VoteLottie from "@/lottie/vote.json";
 import { login } from "@/redux/features/authSlice";
 import { Flex, Heading } from "@chakra-ui/react";
@@ -6,8 +8,6 @@ import { httpsCallable } from "firebase/functions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { functions } from "../firebase/firebase";
-import { ChulaSSOData } from "../interfaces/cusso.interface";
 
 const CallBack = () => {
 
@@ -15,12 +15,15 @@ const CallBack = () => {
     const [searchParams] = useSearchParams();
     const ticketId = searchParams.get("ticket");
 
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const serviceValidation = httpsCallable(functions, "serviceValidation");
+
 
     useEffect(() => {
+        const serviceValidation = httpsCallable(functions, "serviceValidation");
+
         if (ticketId) {
 
             localStorage.removeItem("ticket");
@@ -28,8 +31,6 @@ const CallBack = () => {
 
             serviceValidation({ ticket: ticketId })
                 .then((res) => {
-                    console.log(res);
-
                     const { ouid } = res.data as ChulaSSOData;
 
                     const isScienceStudent = ouid.endsWith("23");
@@ -49,25 +50,24 @@ const CallBack = () => {
                     navigate("/error")
                 })
         }
-    }, [dispatch, navigate, serviceValidation, ticketId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ticketId]);
 
     return (
-        <>
-            <Flex justifyContent="center" h="100svh" alignItems="center" flexDirection="column">
-                <Player
-                    autoplay
-                    loop
-                    src={VoteLottie}
-                    style={{
-                        height: "100%",
-                        width: "100%",
-                    }}
-                />
-                <Heading mt={10} size="md" fontWeight="medium">
-                    กำลังโหลดข้อมูลจาก Chula SSO
-                </Heading>
-            </Flex>
-        </>
+        <Flex justifyContent="center" h="100svh" alignItems="center" flexDirection="column">
+            <Player
+                autoplay
+                loop
+                src={VoteLottie}
+                style={{
+                    height: "100%",
+                    width: "100%",
+                }}
+            />
+            <Heading mt={10} size="md" fontWeight="medium">
+                กำลังโหลดข้อมูลจาก Chula SSO
+            </Heading>
+        </Flex>
     )
 }
 
