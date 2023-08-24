@@ -9,6 +9,11 @@ const TOPIC: ITopicWithouId =
     end: "2023-08-25T17:00:00.000+07:00",
     isPublished: true,
     participants: 0,
+    documents: [{
+        id: "1",
+        title: "เอกสารชี้แจงการจัดการออกเสียงประชามติ",
+        url: "https://drive.google.com/file/d/1-YdiV3id-iIPg5ZBEEwiLZ2K15QfldoY/view?usp=sharing"
+    }],
 }
 
 

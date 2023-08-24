@@ -4,6 +4,7 @@ import { onOpen } from "@/redux/features/modalSlice";
 import { RootState } from "@/redux/store";
 import { Badge, Button, Flex, HStack, Heading, Icon, Skeleton, Stack, Text } from "@chakra-ui/react";
 import { AiFillCalendar, AiFillClockCircle } from "react-icons/ai";
+import { HiOutlineDocumentText } from "react-icons/hi";
 import { MdOutlineHowToVote } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import VoteAgreementModal from "../Modal/VoteAgreementModal";
@@ -18,7 +19,7 @@ export function TopicCard(props: Props) {
   const formatDateConfig: Intl.DateTimeFormatOptions = { year: "numeric", month: "long", day: "numeric" };
 
   const { topic } = props;
-  const { title, participants, start, end } = topic;
+  const { title, participants, start, end, documents } = topic;
 
   const formattedStartDate = new Date(start).toLocaleDateString("th-TH", formatDateConfig);
   const formattedStartTime = new Date(start).toLocaleTimeString("th-TH", formatTimeConfig);
@@ -38,14 +39,38 @@ export function TopicCard(props: Props) {
       bg="gray.50"
       boxShadow={"10px 10px 0px 0px #000000"}
     >
-      <Stack>
-        <HStack>
-          <Badge w="fit-content" alignItems="center" display="flex" gap={1} fontWeight="medium" color="gray.500"><Icon as={AiFillCalendar} />{formattedStartDate}</Badge>
-          <Badge w="fit-content" alignItems="center" display="flex" gap={1} fontWeight="medium" color="gray.500"><Icon as={AiFillClockCircle} />{formattedStartTime} - {formattedEndTime}</Badge>
-        </HStack>
-        <Heading size="md">{title}</Heading>
+      <Stack spacing={5}>
+        <Stack>
+          <HStack>
+            <Badge w="fit-content" alignItems="center" display="flex" gap={1} fontWeight="medium" color="gray.500"><Icon as={AiFillCalendar} />{formattedStartDate}</Badge>
+            <Badge w="fit-content" alignItems="center" display="flex" gap={1} fontWeight="medium" color="gray.500"><Icon as={AiFillClockCircle} />{formattedStartTime} - {formattedEndTime}</Badge>
+          </HStack>
+          <Heading size="md">{title}</Heading>
+          <Text fontSize="xs">ลงความเห็นแล้ว {participants} คน</Text>
+        </Stack>
 
-        <Text fontSize="xs">ลงความเห็นแล้ว {participants} คน</Text>
+        <Flex>
+          {
+            documents.map((doc, index) => (
+              <Button
+                key={index}
+                as="a"
+                href={doc.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                colorScheme="gray"
+                // border="1px solid black"
+                size="sm"
+                fontSize="xs"
+                fontWeight="medium"
+                leftIcon={<Icon as={HiOutlineDocumentText} />}
+                boxShadow="0 0 0 0 #fff"
+              >
+                {doc.title}
+              </Button>
+            ))
+          }
+        </Flex>
       </Stack>
 
       <VoteButton topic={topic} />
